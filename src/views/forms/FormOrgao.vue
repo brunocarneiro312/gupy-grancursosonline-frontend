@@ -2,6 +2,16 @@
    <div class="container mt-5">
       <div class="row">
          <div class="col">
+            <button class="btn btn-primary" @click="teste">Teste</button>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col">
+            <h4>Cadastro de Órgãos Públicos</h4>
+         </div>
+      </div>
+      <div class="row mt-3">
+         <div class="col">
             <div class="form-group">
                <label for="input-nome">Informe o nome do Órgão</label>
                <input type="text" id="input-nome" class="form-control col-6" v-model="orgao.nome"/>
@@ -22,6 +32,7 @@
         name: "FormOrgao",
         data: function () {
             return {
+                title: process.env.VUE_APP_TITLE,
                 orgao: {
                     id: undefined,
                     nome: undefined
@@ -29,6 +40,10 @@
             }
         },
         methods: {
+
+            teste() {
+                this.getOrgao(1);
+            },
 
             getOrgao(id) {
                 apiService.getOrgao(id)
