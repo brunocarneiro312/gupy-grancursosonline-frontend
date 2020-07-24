@@ -2,17 +2,17 @@
    <div class="container mt-5">
       <div class="row">
          <div class="col">
-            <h4>Cadastro de Órgãos Públicos</h4>
+            <h4>Cadastro de Assuntos</h4>
          </div>
       </div>
       <div class="row mt-3">
          <div class="col">
             <div class="form-group">
-               <label for="input-nome">Informe o nome do Órgão</label>
-               <input type="text" id="input-nome" class="form-control col-6" v-model="orgao.request.nome"/>
+               <label for="input-nome">Informe o tópico do assunto</label>
+               <input type="text" id="input-nome" class="form-control col-6" v-model="assunto.request.topico"/>
             </div>
             <div class="form-group">
-               <button :disabled="!orgao.request.nome" class="btn btn-primary" @click="saveOrgao">Cadastrar</button>
+               <button :disabled="!assunto.request.enunciado" class="btn btn-primary" @click="saveAssunto">Cadastrar</button>
             </div>
          </div>
       </div>
@@ -24,54 +24,56 @@
     import apiService from '../../service/api.service';
 
     export default {
-        name: "FormOrgao",
+        name: "FormAssunto",
         data: function () {
             return {
                 title: process.env.VUE_APP_TITLE,
-                orgao: {
+                assunto: {
                     request: {
                         id: undefined,
-                        nome: undefined,
+                        topico: undefined,
+                        assuntos: []
                     },
                     response: {
                         id: undefined,
-                        nome: undefined
+                        topico: undefined,
+                        assuntos: []
                     }
                 }
             }
         },
         methods: {
 
-            getOrgao(id) {
-                apiService.getOrgao(id)
+            getAssunto(id) {
+                apiService.getAssunto(id)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
                     .finally(() => console.log('finalizando'));
             },
 
-            listOrgao() {
-                apiService.listOrgao()
+            listAssunto() {
+                apiService.listAssunto()
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
                     .finally(() => console.log('finalizando'));
             },
 
-            saveOrgao() {
-                apiService.saveOrgao(this.orgao)
+            saveAssunto() {
+                apiService.saveAssunto(this.assunto.request)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
                     .finally(() => console.log('finalizando'));
             },
 
-            updateOrgao() {
-                apiService.updateOrgao(this.orgao)
+            updateAssunto() {
+                apiService.updateAssunto(this.assunto.request)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
                     .finally(() => console.log('finalizando'));
             },
 
-            deleteOrgao(id) {
-                apiService.deleteOrgao(id)
+            deleteAssunto(id) {
+                apiService.deleteAssunto(id)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
                     .finally(() => console.log('finalizando'));

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import FormOrgao from "../views/forms/FormOrgao";
+import FormBanca from "../views/forms/FormBanca";
+import FormQuestao from "../views/forms/FormQuestao";
+import FormAssunto from "../views/forms/FormAssunto";
 
 Vue.use(VueRouter)
 
@@ -12,12 +15,19 @@ const routes = [
         component: Home
     },
     {
-        path: '/about',
-        name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        path: '/form/banca',
+        name: 'FormBanca',
+        component: FormBanca
+    },
+    {
+        path: '/form/questao',
+        name: 'FormQuestao',
+        component: FormQuestao
+    },
+    {
+        path: '/form/assunto',
+        name: 'FormAssunto',
+        component: FormAssunto
     },
     {
         path: '/form/orgao',
