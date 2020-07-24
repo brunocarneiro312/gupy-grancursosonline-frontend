@@ -6,6 +6,7 @@
 
 <style lang="scss">
   @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+  @import "../node_modules/bootstrap-table/dist/bootstrap-table.min.css";
 
   * {
     margin: 0;

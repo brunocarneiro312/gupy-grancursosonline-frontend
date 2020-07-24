@@ -2,11 +2,6 @@
    <div class="container mt-5">
       <div class="row">
          <div class="col">
-            {{ questoes }}
-         </div>
-      </div>
-      <div class="row">
-         <div class="col">
             <h4>Cadastro de Questões</h4>
          </div>
       </div>
@@ -23,26 +18,19 @@
       </div>
       <div class="row mt-3">
          <div class="col">
-            <table class="table table-sm table-hover text-center">
-               <thead>
-                  <tr>
-                     <th>#</th>
-                     <th>Banca</th>
-                     <th>Órgão</th>
-                     <th>Assunto</th>
-                     <th>Enunciado</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr v-for="questao in questoes" :key="questao.id">
-                     <td>{{ questao.id }}</td>
-                     <td>{{ questao.banca }}</td>
-                     <td>{{ questao.orgao }}</td>
-                     <td>{{ questao.assunto }}</td>
-                     <td>{{ questao.enunciado }}</td>
-                  </tr>
-               </tbody>
-            </table>
+            <b-table
+               hover
+               :items="questoes"
+               :fields="tableConfig.fields"
+               :current-page="1"
+               :per-page="10" />
+            <div class="justify-content-center row my-1">
+               <b-pagination
+                  size="md"
+                  :total-rows="this.questoes.length"
+                  :per-page="tableConfig.perPage"
+                  v-model="tableConfig.currentPage" />
+            </div>
          </div>
       </div>
    </div>
@@ -57,6 +45,16 @@
         data: function () {
             return {
                 title: process.env.VUE_APP_TITLE,
+                fields: {
+                    id: {
+                        label: 'Id',
+                        sortable: true,
+                    },
+                },
+                tableConfig: {
+                    perPage: 5,
+                    currentPage: 1
+                },
                 questao: {
                     request: {
                         id: undefined,
@@ -86,14 +84,14 @@
                 apiService.getQuestao(id)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .finally();
             },
 
             listQuestao() {
                 apiService.listQuestao()
                     .then((response) => this.questoes = response.data)
                     .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .finally();
             },
 
             saveQuestao() {
@@ -103,21 +101,21 @@
                         this.listQuestao();
                     })
                     .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .finally();
             },
 
             updateQuestao() {
                 apiService.updateQuestao(this.questao.request)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .finally();
             },
 
             deleteQuestao(id) {
                 apiService.deleteQuestao(id)
                     .then((response) => console.log(response.data))
                     .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .finally();
             }
         }
     }
