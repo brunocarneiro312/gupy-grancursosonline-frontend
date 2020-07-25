@@ -23,7 +23,8 @@
                :items="questoes"
                :fields="tableConfig.fields"
                :current-page="1"
-               :per-page="10" />
+               :per-page="10">
+            </b-table>
             <div class="justify-content-center row my-1">
                <b-pagination
                   size="md"

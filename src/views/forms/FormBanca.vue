@@ -2,6 +2,17 @@
    <div class="container mt-5">
       <div class="row">
          <div class="col">
+            <b-alert
+               :show="hasMessage"
+               :variant="messageStyle"
+               :dismissible="true"
+            >
+               {{ message }}
+            </b-alert>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col">
             <h4>Cadastro de Bancas</h4>
          </div>
       </div>
@@ -16,6 +27,24 @@
             </div>
          </div>
       </div>
+      <div class="row mt-3">
+         <div class="col">
+            <table class="table table-hover table-sm">
+               <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Nome</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr v-for="banca in bancas" :key="banca.id">
+                     <td>{{ banca.id }}</td>
+                     <td>{{ banca.nome }}</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
    </div>
 </template>
 
@@ -28,6 +57,9 @@
         data: function () {
             return {
                 title: process.env.VUE_APP_TITLE,
+                hasMessage: false,
+                message: undefined,
+                status: undefined,
                 banca: {
                     request: {
                        id: undefined,
@@ -37,7 +69,16 @@
                         id: undefined,
                         nome: undefined
                     }
-                }
+                },
+                bancas: [],
+            }
+        },
+        created() {
+            this.listBanca();
+        },
+        computed: {
+            messageStyle() {
+                return this.status == 200 ? 'success' : 'danger';
             }
         },
         methods: {
@@ -51,16 +92,23 @@
 
             listBanca() {
                 apiService.listBanca()
-                    .then((response) => console.log(response.data))
+                    .then((response) => this.bancas = response.data)
                     .catch((error) => console.log(error))
                     .finally(() => console.log('finalizando'));
             },
 
             saveBanca() {
                 apiService.saveBanca(this.banca.request)
-                    .then((response) => console.log(response.data))
-                    .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .then((response) => {
+                        this.listBanca();
+                        this.hasMessage = true;
+                        this.message = 'Banca cadastrada com sucesso.';
+                        this.status = response.status;
+                    })
+                    .catch((error ) => {
+                        this.message = 'Erro durante o cadastro de nova Banca.';
+                        this.status = error.response.status;
+                    });
             },
 
             updateBanca() {
