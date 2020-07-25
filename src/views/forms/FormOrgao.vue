@@ -20,7 +20,7 @@
          <div class="col">
             <div class="form-group">
                <label for="input-nome">Informe o nome do Órgão</label>
-               <input type="text" id="input-nome" class="form-control col-6" v-model="orgao.request.nome"/>
+               <input type="text" id="input-nome" class="form-control col" v-model="orgao.request.nome"/>
             </div>
             <div class="form-group">
                <button :disabled="!orgao.request.nome" class="btn btn-primary" @click="saveOrgao">Cadastrar</button>

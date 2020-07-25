@@ -20,7 +20,7 @@
          <div class="col">
             <div class="form-group">
                <label for="input-nome">Informe o nome da Banca</label>
-               <input type="text" id="input-nome" class="form-control col-6" v-model="banca.request.nome"/>
+               <input type="text" id="input-nome" class="form-control" v-model="banca.request.nome"/>
             </div>
             <div class="form-group">
                <button :disabled="!banca.request.nome" class="btn btn-primary" @click="saveBanca">Cadastrar</button>

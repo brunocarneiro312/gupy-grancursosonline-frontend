@@ -9,29 +9,82 @@
          <div class="col">
             <div class="form-group">
                <label for="input-nome">Informe o enunciado da questão</label>
-               <input type="text" id="input-nome" class="form-control col-6" v-model="questao.request.enunciado"/>
+               <input type="text" id="input-nome" class="form-control" v-model="questao.request.enunciado"/>
             </div>
             <div class="form-group">
-               <button :disabled="!questao.request.enunciado" class="btn btn-primary" @click="saveQuestao">Cadastrar</button>
+               <label for="select-orgao">Informe o Órgão</label>
+               <select type="text" id="select-orgao" class="form-control" v-model="questao.request.orgaoId">
+                  <option value="">--</option>
+                  <option v-for="orgao in orgaos" :key="orgao.id" :value="orgao.id">
+                     {{ orgao.nome }}
+                  </option>
+               </select>
+            </div>
+            <div class="form-group">
+               <label for="select-banca">Informe a Banca</label>
+               <select type="text" id="select-banca" class="form-control" v-model="questao.request.bancaId">
+                  <option value="">--</option>
+                  <option v-for="banca in bancas" :key="banca.id" :value="banca.id">
+                     {{ banca.nome }}
+                  </option>
+               </select>
+            </div>
+            <div class="form-group">
+               <label for="select-assunto">Informe o Assunto</label>
+               <select type="text" id="select-assunto" class="form-control" v-model="questao.request.assuntoId">
+                  <option value="">--</option>
+                  <option v-for="assunto in assuntos" :key="assunto.id" :value="assunto.id">
+                     {{ assunto.topico }}
+                  </option>
+               </select>
+            </div>
+            <div class="form-group">
+               <button
+                  :disabled="!isButtonActive"
+                  class="btn btn-primary"
+                  @click="saveQuestao"
+               >
+                  Cadastrar
+               </button>
             </div>
          </div>
       </div>
       <div class="row mt-3">
          <div class="col">
-            <b-table
-               hover
-               :items="questoes"
-               :fields="tableConfig.fields"
-               :current-page="1"
-               :per-page="10">
-            </b-table>
-            <div class="justify-content-center row my-1">
-               <b-pagination
-                  size="md"
-                  :total-rows="this.questoes.length"
-                  :per-page="tableConfig.perPage"
-                  v-model="tableConfig.currentPage" />
-            </div>
+            <table class="table table-hover table-sm">
+               <thead>
+               <tr>
+                  <th>Id</th>
+                  <th>Órgão</th>
+                  <th>Banca</th>
+                  <th>Assunto</th>
+                  <th>Enunciado</th>
+               </tr>
+               </thead>
+               <tbody>
+               <tr v-for="questao in questoes" :key="questao.id">
+                  <td>{{ questao.id }}</td>
+                  <td>{{ questao.orgao }}</td>
+                  <td>{{ questao.banca }}</td>
+                  <td>{{ questao.assunto }}</td>
+                  <td>{{ questao.enunciado }}</td>
+               </tr>
+               </tbody>
+            </table>
+<!--            <b-table-->
+<!--               hover-->
+<!--               :items="questoes"-->
+<!--               :fields="tableConfig.fields"-->
+<!--               :current-page="1"-->
+<!--               :per-page="10">-->
+<!--            </b-table>-->
+<!--            <div class="justify-content-center row my-1">-->
+<!--               <b-pagination-->
+<!--                  size="md"-->
+<!--                  :total-rows="this.questoes.length"-->
+<!--                  :per-page="tableConfig.perPage"-->
+<!--                  v-model="tableConfig.currentPage" />-->
+<!--            </div>-->
          </div>
       </div>
    </div>
@@ -59,9 +112,9 @@
                 questao: {
                     request: {
                         id: undefined,
-                        assunto: undefined,
-                        orgao: undefined,
-                        banca: undefined,
+                        assuntoId: undefined,
+                        orgaoId: undefined,
+                        bancaId: undefined,
                         enunciado: undefined
                     },
                     response: {
@@ -73,11 +126,25 @@
                     }
                 },
                 questoes: [],
+                bancas: [],
+                orgaos: [],
+                assuntos: [],
                 error: undefined,
             }
         },
         created() {
             this.listQuestao();
+            this.listBanca();
+            this.listOrgao();
+            this.listAssunto();
+        },
+        computed: {
+            isButtonActive() {
+                return this.questao.request.assuntoId
+                    && this.questao.request.bancaId
+                    && this.questao.request.orgaoId
+                    && this.questao.request.enunciado;
+            }
         },
         methods: {
 
@@ -91,6 +158,27 @@
             listQuestao() {
                 apiService.listQuestao()
                     .then((response) => this.questoes = response.data)
+                    .catch((error) => console.log(error))
+                    .finally();
+            },
+
+            listBanca() {
+                apiService.listBanca()
+                    .then((response) => this.bancas = response.data)
+                    .catch((error) => console.log(error))
+                    .finally();
+            },
+
+            listOrgao() {
+                apiService.listOrgao()
+                    .then((response) => this.orgaos = response.data)
+                    .catch((error) => console.log(error))
+                    .finally();
+            },
+
+            listAssunto() {
+                apiService.listAssunto()
+                    .then((response) => this.assuntos = response.data)
                     .catch((error) => console.log(error))
                     .finally();
             },

@@ -2,11 +2,6 @@
    <div class="container mt-5">
       <div class="row">
          <div class="col">
-            {{ assunto }}
-         </div>
-      </div>
-      <div class="row">
-         <div class="col">
             <b-alert
                :show="hasMessage"
                :variant="messageStyle"
@@ -48,12 +43,14 @@
                <tr>
                   <th>Id</th>
                   <th>Nome</th>
+                  <th>Árvore de Assuntos</th>
                </tr>
                </thead>
                <tbody>
                <tr v-for="assunto in assuntos" :key="assunto.id">
                   <td>{{ assunto.id }}</td>
                   <td>{{ assunto.topico }}</td>
+                  <td>{{ assunto.topicoAssuntoPai || '-'}}</td>
                </tr>
                </tbody>
             </table>
