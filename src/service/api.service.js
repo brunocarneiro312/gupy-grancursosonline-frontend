@@ -16,6 +16,10 @@ const getAssunto = (assuntoId) => {
     return axios.get(`${process.env.VUE_APP_API}/assunto/${assuntoId}`);
 };
 
+const getPlanoEstudo = (bancaId, orgaoId) => {
+    return axios.get(`${process.env.VUE_APP_API}/questao/plano?bancaId=${bancaId}&orgaoId=${orgaoId}`);
+};
+
 const listOrgao = () => {
     return axios.get(`${process.env.VUE_APP_API}/orgao`);
 };
@@ -85,6 +89,7 @@ export default {
     getBanca: getBanca,
     getQuestao: getQuestao,
     getAssunto: getAssunto,
+    getPlanoEstudo: getPlanoEstudo,
     listOrgao: listOrgao,
     listBanca: listBanca,
     listQuestao: listQuestao,
