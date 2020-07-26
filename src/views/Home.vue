@@ -38,7 +38,15 @@
                </select>
             </div>
             <div class="form-group">
-               <button class="btn btn-primary" @click="getPlanoEstudo">Criar programa de estudos</button>
+               <button
+                  class="btn btn-primary"
+                  @click="getPlanoEstudo"
+                  :disabled="!home.request.orgaoId || !home.request.bancaId"
+               >
+                  Criar programa de estudos
+               </button>
+               <span class="mx-2" style="color: #ddd">|</span>
+               <button class="btn btn-light" @click="reset">Limpar</button>
             </div>
          </div>
       </div>
@@ -139,6 +147,12 @@
                         this.message = 'Erro ao obter questões.';
                         this.planoEstudo = [];
                     });
+            },
+
+            reset() {
+                this.home.request.orgaoId = undefined;
+                this.home.request.bancaId = undefined;
+                this.planoEstudo = [];
             }
         }
     }
