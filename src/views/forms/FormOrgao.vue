@@ -17,32 +17,35 @@
          </div>
       </div>
       <div class="row mt-3">
-         <div class="col">
+         <div class="col col-md-4">
             <div class="form-group">
                <label for="input-nome">Informe o nome do Órgão</label>
                <input type="text" id="input-nome" class="form-control col" v-model="orgao.request.nome"/>
             </div>
             <div class="form-group">
-               <button :disabled="!orgao.request.nome" class="btn btn-primary" @click="saveOrgao">Cadastrar</button>
+               <button :disabled="!orgao.request.nome" class="btn btn-dark" @click="saveOrgao">Cadastrar</button>
             </div>
          </div>
       </div>
       <div class="row mt-3">
          <div class="col">
-            <table class="table table-hover table-sm">
-               <thead>
-               <tr>
-                  <th>Id</th>
-                  <th>Nome</th>
-               </tr>
-               </thead>
-               <tbody>
-               <tr v-for="orgao in orgaos" :key="orgao.id">
-                  <td>{{ orgao.id }}</td>
-                  <td>{{ orgao.nome }}</td>
-               </tr>
-               </tbody>
-            </table>
+            <h4>Órgãos Cadastrados</h4>
+            <div class="overflow-auto">
+               <table class="table table-hover table-sm table-bordered">
+                  <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Nome</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="orgao in orgaos" :key="orgao.id">
+                     <td>{{ orgao.id }}</td>
+                     <td>{{ orgao.nome }}</td>
+                  </tr>
+                  </tbody>
+               </table>
+            </div>
          </div>
       </div>
    </div>

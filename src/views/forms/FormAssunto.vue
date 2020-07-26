@@ -13,11 +13,11 @@
       </div>
       <div class="row">
          <div class="col">
-            <h4>Cadastro de Assunto</h4>
+            <h4>Cadastro de Assuntos</h4>
          </div>
       </div>
       <div class="row mt-3">
-         <div class="col">
+         <div class="col col-md-4">
             <div class="form-group">
                <label for="input-nome">Informe o tópico do assunto</label>
                <input type="text" id="input-nome" class="form-control" v-model="assunto.request.topico"/>
@@ -32,28 +32,31 @@
                </select>
             </div>
             <div class="form-group">
-               <button :disabled="!assunto.request.topico" class="btn btn-primary" @click="saveAssunto">Cadastrar</button>
+               <button :disabled="!assunto.request.topico" class="btn btn-dark" @click="saveAssunto">Cadastrar</button>
             </div>
          </div>
       </div>
       <div class="row mt-3">
          <div class="col">
-            <table class="table table-hover table-sm">
-               <thead>
-               <tr>
-                  <th>Id</th>
-                  <th>Nome</th>
-                  <th>Árvore de Assuntos</th>
-               </tr>
-               </thead>
-               <tbody>
-               <tr v-for="assunto in assuntos" :key="assunto.id">
-                  <td>{{ assunto.id }}</td>
-                  <td>{{ assunto.topico }}</td>
-                  <td>{{ assunto.topicoAssuntoPai || '-'}}</td>
-               </tr>
-               </tbody>
-            </table>
+            <h4>Assuntos Cadastrados</h4>
+            <div class="overflow-auto">
+               <table class="table table-hover table-sm table-bordered">
+                  <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Nome</th>
+                     <th>Árvore de Assuntos</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="assunto in assuntos" :key="assunto.id">
+                     <td>{{ assunto.id }}</td>
+                     <td>{{ assunto.topico }}</td>
+                     <td>{{ assunto.topicoAssuntoPai || '-'}}</td>
+                  </tr>
+                  </tbody>
+               </table>
+            </div>
          </div>
       </div>
    </div>

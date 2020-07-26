@@ -17,32 +17,35 @@
          </div>
       </div>
       <div class="row mt-3">
-         <div class="col">
+         <div class="col col-md-4">
             <div class="form-group">
                <label for="input-nome">Informe o nome da Banca</label>
                <input type="text" id="input-nome" class="form-control" v-model="banca.request.nome"/>
             </div>
             <div class="form-group">
-               <button :disabled="!banca.request.nome" class="btn btn-primary" @click="saveBanca">Cadastrar</button>
+               <button :disabled="!banca.request.nome" class="btn btn-dark" @click="saveBanca">Cadastrar</button>
             </div>
          </div>
       </div>
       <div class="row mt-3">
          <div class="col">
-            <table class="table table-hover table-sm">
-               <thead>
-                  <tr>
-                     <th>Id</th>
-                     <th>Nome</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr v-for="banca in bancas" :key="banca.id">
-                     <td>{{ banca.id }}</td>
-                     <td>{{ banca.nome }}</td>
-                  </tr>
-               </tbody>
-            </table>
+            <h4>Bancas Cadastradas</h4>
+            <div class="overflow-auto">
+               <table class="table table-hover table-sm table-bordered">
+                  <thead>
+                     <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr v-for="banca in bancas" :key="banca.id">
+                        <td>{{ banca.id }}</td>
+                        <td>{{ banca.nome }}</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
          </div>
       </div>
    </div>

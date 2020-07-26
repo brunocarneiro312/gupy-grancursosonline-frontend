@@ -51,26 +51,28 @@
       </div>
       <div class="row mt-3">
          <div class="col">
-            <table class="table table-hover table-sm">
-               <thead>
-               <tr>
-                  <th>Id</th>
-                  <th>Órgão</th>
-                  <th>Banca</th>
-                  <th>Assunto</th>
-                  <th>Enunciado</th>
-               </tr>
-               </thead>
-               <tbody>
-               <tr v-for="questao in questoes" :key="questao.id">
-                  <td>{{ questao.id }}</td>
-                  <td>{{ questao.orgao }}</td>
-                  <td>{{ questao.banca }}</td>
-                  <td>{{ questao.assunto }}</td>
-                  <td>{{ questao.enunciado }}</td>
-               </tr>
-               </tbody>
-            </table>
+            <div class="overflow-auto">
+               <table class="table table-hover table-sm">
+                  <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Órgão</th>
+                     <th>Banca</th>
+                     <th>Assunto</th>
+                     <th>Enunciado</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="questao in questoes" :key="questao.id">
+                     <td>{{ questao.id }}</td>
+                     <td>{{ questao.orgao }}</td>
+                     <td>{{ questao.banca }}</td>
+                     <td>{{ questao.assunto }}</td>
+                     <td>{{ questao.enunciado }}</td>
+                  </tr>
+                  </tbody>
+               </table>
+            </div>
 <!--            <b-table-->
 <!--               hover-->
 <!--               :items="questoes"-->

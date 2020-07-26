@@ -18,7 +18,7 @@
          </div>
       </div>
       <div class="row mt-3">
-         <div class="col">
+         <div class="col-12 col-md-4">
             <div class="form-group">
                <label for="select-orgao">Órgão</label>
                <select type="text" id="select-orgao" class="form-control" v-model="home.request.orgaoId">
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                <button
-                  class="btn btn-primary"
+                  class="btn btn-dark"
                   @click="getPlanoEstudo"
                   :disabled="!home.request.orgaoId || !home.request.bancaId"
                >
@@ -49,23 +49,23 @@
                <button class="btn btn-light" @click="reset">Limpar</button>
             </div>
          </div>
-      </div>
-      <div class="row mt-5" v-if="planoEstudo.length">
-         <div class="col">
-            <table class="table table-hover table-sm">
-               <thead>
+         <div class="col-12">
+            <div class="overflow-auto mt-4" v-if="planoEstudo.length">
+               <table class="table table-hover table-sm table-bordered">
+                  <thead>
                   <tr>
                      <th>Assunto</th>
                      <th>Quantidade de Questões</th>
                   </tr>
-               </thead>
-               <tbody>
+                  </thead>
+                  <tbody>
                   <tr v-for="plano in planoEstudo" :key="plano.assunto">
                      <td>{{ plano.assunto }}</td>
                      <td>{{ plano.count }}</td>
                   </tr>
-               </tbody>
-            </table>
+                  </tbody>
+               </table>
+            </div>
          </div>
       </div>
    </div>
@@ -134,9 +134,8 @@
                 apiService.getPlanoEstudo(this.home.request.bancaId, this.home.request.orgaoId)
                     .then(response => {
                         if (response.data.length) {
-                           this.planoEstudo = response.data;
-                        }
-                        else {
+                            this.planoEstudo = response.data;
+                        } else {
                             this.hasMessage = true;
                             this.message = 'Não existem questões cadastradas para o órgão e banca selecionados.';
                             this.planoEstudo = [];
