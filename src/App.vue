@@ -20,6 +20,9 @@
             <li class="nav-item">
               <router-link to="/form/assunto" class="nav-link">Assunto</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/form/questao" class="nav-link">Questões</router-link>
+            </li>
           </ul>
         </div>
       </nav>

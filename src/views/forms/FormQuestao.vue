@@ -6,7 +6,7 @@
          </div>
       </div>
       <div class="row mt-3">
-         <div class="col">
+         <div class="col col-md-4">
             <div class="form-group">
                <label for="input-nome">Informe o enunciado da questão</label>
                <input type="text" id="input-nome" class="form-control" v-model="questao.request.enunciado"/>
@@ -41,7 +41,7 @@
             <div class="form-group">
                <button
                   :disabled="!isButtonActive"
-                  class="btn btn-primary"
+                  class="btn btn-dark"
                   @click="saveQuestao"
                >
                   Cadastrar
@@ -52,7 +52,7 @@
       <div class="row mt-3">
          <div class="col">
             <div class="overflow-auto">
-               <table class="table table-hover table-sm">
+               <table class="table table-hover table-sm table-bordered">
                   <thead>
                   <tr>
                      <th>Id</th>
