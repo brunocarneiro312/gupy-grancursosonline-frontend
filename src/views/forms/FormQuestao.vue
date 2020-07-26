@@ -8,10 +8,6 @@
       <div class="row mt-3">
          <div class="col col-md-4">
             <div class="form-group">
-               <label for="input-nome">Informe o enunciado da questão</label>
-               <input type="text" id="input-nome" class="form-control" v-model="questao.request.enunciado"/>
-            </div>
-            <div class="form-group">
                <label for="select-orgao">Informe o Órgão</label>
                <select type="text" id="select-orgao" class="form-control" v-model="questao.request.orgaoId">
                   <option value="">--</option>
@@ -37,6 +33,17 @@
                      {{ assunto.topico }}
                   </option>
                </select>
+            </div>
+            <div class="form-group">
+               <label for="input-nome">Informe o enunciado da questão</label>
+               <textarea
+                  type="text"
+                  id="input-nome"
+                  class="form-control"
+                  v-model="questao.request.enunciado"
+                  style="resize: none"
+                  rows="4"
+               ></textarea>
             </div>
             <div class="form-group">
                <button
@@ -192,7 +199,13 @@
                         this.listQuestao();
                     })
                     .catch((error) => console.log(error))
-                    .finally();
+                    .finally(() => {
+                        this.questao.request.id = undefined;
+                        this.questao.request.orgaoId = undefined;
+                        this.questao.request.bancaId = undefined;
+                        this.questao.request.assuntoId = undefined;
+                        this.questao.request.enunciado = undefined;
+                    });
             },
 
             updateQuestao() {

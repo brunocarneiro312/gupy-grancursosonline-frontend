@@ -89,15 +89,13 @@
             getBanca(id) {
                 apiService.getBanca(id)
                     .then((response) => console.log(response.data))
-                    .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .catch((error) => console.log(error));
             },
 
             listBanca() {
                 apiService.listBanca()
                     .then((response) => this.bancas = response.data)
-                    .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .catch((error) => console.log(error));
             },
 
             saveBanca() {
@@ -111,21 +109,23 @@
                     .catch((error ) => {
                         this.message = 'Erro durante o cadastro de nova Banca.';
                         this.status = error.response.status;
-                    });
+                    })
+                .finally(() => {
+                    this.banca.request.id = undefined;
+                    this.banca.request.nome = undefined;
+                });
             },
 
             updateBanca() {
                 apiService.updateBanca(this.banca.request)
                     .then((response) => console.log(response.data))
-                    .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .catch((error) => console.log(error));
             },
 
             deleteBanca(id) {
                 apiService.deleteBanca(id)
                     .then((response) => console.log(response.data))
-                    .catch((error) => console.log(error))
-                    .finally(() => console.log('finalizando'));
+                    .catch((error) => console.log(error));
             }
         }
     }

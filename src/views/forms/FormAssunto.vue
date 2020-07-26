@@ -24,8 +24,9 @@
             </div>
             <div class="form-group">
                <label for="input-assunto-pai">Selecione o assunto pai, caso exista</label>
-               <select name="assunto-pai" id="input-assunto-pai" class="form-control" v-model="assunto.request.assuntoPai">
-                  <option value=""> -- </option>
+               <select name="assunto-pai" id="input-assunto-pai" class="form-control"
+                       v-model="assunto.request.assuntoPai">
+                  <option value=""> --</option>
                   <option v-for="assunto in assuntos" :key="assunto.id" :value="assunto.id">
                      {{ assunto.topico }}
                   </option>
@@ -124,6 +125,11 @@
                     .catch((error) => {
                         this.message = 'Erro durante o cadastro de novo Assunto.';
                         this.status = error.response.status;
+                    })
+                    .finally(() => {
+                        this.assunto.request.id = undefined;
+                        this.assunto.request.topico = undefined;
+                        this.assunto.request.assuntoPai = undefined;
                     });
             },
 

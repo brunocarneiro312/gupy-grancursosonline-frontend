@@ -111,6 +111,10 @@
                     .catch((error) => {
                         this.message = 'Erro durante o cadastro de novo Órgão.';
                         this.status = error.response.status;
+                    })
+                    .finally(() => {
+                        this.orgao.request.id = undefined;
+                        this.orgao.request.nome = undefined;
                     });
             },
 
