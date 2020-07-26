@@ -61,7 +61,8 @@ RN3: Preciso de muitas questões para poder gerar programas de estudos diversos.
 - A aplicação estará rodando na porta 5000 com o endereço `http://localhost:5000/grancursos`
 
 #### Banco de dados
-- É necessário a configuração de um banco de dados MySQL local para o armazenamento das informações.
+- Projeto poderá ser rodado com uma base de dados em memória (H2). Para isso, descomente a configuração do H2 no `application.properties` e comente a do MySQL
+- É necessário a configuração de um banco de dados MySQL local para o armazenamento das informações de forma fixa.
 - Certifique-se de que as configurações do banco de dados estão corretas no arquivo `application.properties` do projeto backend.
 
 #### Após a execução dos passos acima
